@@ -12544,11 +12544,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\CinemaPink\\CinemaPink.csproj",
+      "projectUniqueName": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\Cinema_Pink\\CinemaPink\\CinemaPink.csproj",
       "projectName": "CinemaPink",
-      "projectPath": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\CinemaPink\\CinemaPink.csproj",
+      "projectPath": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\Cinema_Pink\\CinemaPink\\CinemaPink.csproj",
       "packagesPath": "C:\\Users\\betoth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\CinemaPink\\obj\\",
+      "outputPath": "C:\\Users\\betoth\\source\\repos\\CinemaPink\\Cinema_Pink\\CinemaPink\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
