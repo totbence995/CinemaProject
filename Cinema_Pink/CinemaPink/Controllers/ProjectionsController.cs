@@ -25,15 +25,28 @@ namespace CinemaPink.Controllers
         //    var cinema_context = _context.Projections.Include(p => p.Film).Include(p => p.Room);
         //    return View(await cinema_context.ToListAsync());
         //}
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+          string sortOrder,
+         string currentFilter,
+         string searchString,
+          int? page)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
 
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             var projections = from p in _context.Projections
-                              .Include(p=>p.Film).Include(p=>p.Room)
-                           select p;
+                              .Include(p => p.Film).Include(p => p.Room)
+                              select p;
             if (!String.IsNullOrEmpty(searchString))
             {
                 projections = projections.Where(p => p.Film.Title.Contains(searchString));
@@ -54,7 +67,8 @@ namespace CinemaPink.Controllers
                     projections = projections.OrderBy(p => p.Film.Title);
                     break;
             }
-            return View(await projections.AsNoTracking().ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<Projection>.CreateAsync(projections.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Projections/Create
@@ -173,5 +187,7 @@ namespace CinemaPink.Controllers
         {
             return _context.Projections.Any(e => e.ID == id);
         }
+
+        
     }
 }
