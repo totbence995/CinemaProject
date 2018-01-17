@@ -20,49 +20,41 @@ namespace CinemaPink.Controllers
         }
 
         // GET: Projections
-        public async Task<IActionResult> Index()
-        {
-            var cinema_context = _context.Projections.Include(p => p.Film).Include(p => p.Room);
-            return View(await cinema_context.ToListAsync());
-        }
-        //public async Task<IActionResult> Index(string sortOrder)
+        //public async Task<IActionResult> Index()
         //{
-
-            //    ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            //    var projections = from p in _context.Projections
-            //                   select p;
-
-            //    switch (sortOrder)
-            //    {
-
-            //        case "Date":
-            //            projections = projections.OrderBy(p => p.Date);
-            //            break;
-            //        case "date_desc":
-            //            projections = projections.OrderByDescending(p => p.Date);
-            //            break;
-
-            //    }
-            //    return View(await projections.AsNoTracking().ToListAsync());
-            //}
-            // GET: Projections/Details/5
-            public async Task<IActionResult> Details(int? id)
+        //    var cinema_context = _context.Projections.Include(p => p.Film).Include(p => p.Room);
+        //    return View(await cinema_context.ToListAsync());
+        //}
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
 
-            var projection = await _context.Projections
-                .Include(p => p.Film)
-                .Include(p => p.Room)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (projection == null)
+            var projections = from p in _context.Projections
+                              .Include(p=>p.Film).Include(p=>p.Room)
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
-            }
+                projections = projections.Where(p => p.Film.Title.Contains(searchString));
 
-            return View(projection);
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    projections = projections.OrderByDescending(p => p.Film.Title);
+                    break;
+                case "Date":
+                    projections = projections.OrderBy(p => p.Date);
+                    break;
+                case "date_desc":
+                    projections = projections.OrderByDescending(p => p.Date);
+                    break;
+                default:
+                    projections = projections.OrderBy(p => p.Film.Title);
+                    break;
+            }
+            return View(await projections.AsNoTracking().ToListAsync());
         }
 
         // GET: Projections/Create
