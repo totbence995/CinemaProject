@@ -9,3 +9,14 @@ C:\Users\betoth\source\repos\CinemaPink\CinemaPink\obj\Debug\netcoreapp2.0\Cinem
 C:\Users\betoth\source\repos\CinemaPink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.AssemblyInfo.cs
 C:\Users\betoth\source\repos\CinemaPink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.dll
 C:\Users\betoth\source\repos\CinemaPink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.pdb
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\bin\Debug\netcoreapp2.0\CinemaPink.deps.json
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\bin\Debug\netcoreapp2.0\CinemaPink.runtimeconfig.json
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\bin\Debug\netcoreapp2.0\CinemaPink.runtimeconfig.dev.json
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\bin\Debug\netcoreapp2.0\CinemaPink.dll
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\bin\Debug\netcoreapp2.0\CinemaPink.pdb
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.csprojResolveAssemblyReference.cache
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.csproj.CoreCompileInputs.cache
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.AssemblyInfoInputs.cache
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.AssemblyInfo.cs
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.dll
+C:\Users\betoth\source\repos\CinemaPink\Cinema_Pink\CinemaPink\obj\Debug\netcoreapp2.0\CinemaPink.pdb
