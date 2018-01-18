@@ -33,3 +33,12 @@
         display: none;
     }
 }
+
+.seats
+{
+    background-color:#4cff00;
+    width:30px;
+    height:30px;
+    margin:auto;
+    padding:10px;
+}

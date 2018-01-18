@@ -35,6 +35,8 @@ namespace CinemaPink.Controllers
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
 
+            _context.Projections.Include(p => p.Room).ThenInclude(r => r.Seats);
+
             if (searchString != null)
             {
                 page = 1;
@@ -187,7 +189,40 @@ namespace CinemaPink.Controllers
         {
             return _context.Projections.Any(e => e.ID == id);
         }
+        [HttpGet]
+        public async Task<IActionResult> Reserve(int id)
+        {
+            var projection = await _context.Projections.SingleOrDefaultAsync(p => p.ID == id);
+            await _context.Reservations.AddAsync(new Reservation()
+            {
+                ProjectionID = id,
 
-        
+                SeatID = 2,
+
+                Seat = _context.Seats.Where(s => s.ID == 3).FirstOrDefault()
+
+
+
+            });
+            await _context.SaveChangesAsync();
+            Notification notification = new Notification() { EmailAddress = "c@c.com", NumberOfSeats = 3, Title = "Star Wars VIII" };
+            //new Notification() obj;
+            return View(notification);
+        }
+
+        public async Task<IActionResult> Room(int id)
+        {
+            var seatList = await _context.Projections
+                .Include(p => p.Room)
+                .Include(x => x.Room.Seats)
+                .Where(p => p.ID == id)
+                            .FirstOrDefaultAsync();
+
+            //var l = seatList.Select(p => new SeatDTO() { ID = p. });
+
+
+            return View(seatList.Room);
+        }
+
     }
 }

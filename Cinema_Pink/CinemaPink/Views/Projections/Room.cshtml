@@ -1,0 +1,13 @@
+﻿@model CinemaPink.Models.Room
+@{
+    ViewData["Title"] = "Room";
+}
+<div>
+
+    @foreach (var seat in Model.Seats)
+    {
+        <div class="seats">@seat.ID</div>
+        <br />
+    }
+</div>
+
