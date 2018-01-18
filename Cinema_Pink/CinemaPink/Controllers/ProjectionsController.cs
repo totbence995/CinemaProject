@@ -212,16 +212,16 @@ namespace CinemaPink.Controllers
 
         public async Task<IActionResult> Room(int id)
         {
-            var seatList = await _context.Projections
+            var projection = await _context.Projections
                 .Include(p => p.Room)
                 .Include(x => x.Room.Seats)
                 .Where(p => p.ID == id)
                             .FirstOrDefaultAsync();
 
-            //var l = seatList.Select(p => new SeatDTO() { ID = p. });
+            var dTOList = projection.Room.Seats.Select(y => new SeatDTO(y.ID,true)).ToList();
 
 
-            return View(seatList.Room);
+            return View(dTOList);
         }
 
     }

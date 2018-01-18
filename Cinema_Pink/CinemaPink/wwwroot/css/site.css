@@ -36,7 +36,8 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 25% 25% 25% 25% ;
+    
     background-color: #808080;
     padding: 10px;
 }
@@ -44,10 +45,20 @@
 .grid-item {
     background-color: #4cff00;
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
+    padding: 10px;
+    font-size: 10px;
     text-align: center;
-    margin:10px;
-
-    
+    margin: 10px;
+}
+.grid-reserved {
+    background-color: #808080;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 10px;
+    text-align: center;
+    margin: 10px;
+}
+    .gap
+{
+ margin:20px;
 }
