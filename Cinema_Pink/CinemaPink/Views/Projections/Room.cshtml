@@ -2,12 +2,12 @@
 @{
     ViewData["Title"] = "Room";
 }
-<div>
+<div class="grid-container">
 
     @foreach (var seat in Model.Seats)
     {
-        <div class="seats">@seat.ID</div>
-        <br />
+        <div class="grid-item">@seat.ID</div>
+       
     }
 </div>
 
