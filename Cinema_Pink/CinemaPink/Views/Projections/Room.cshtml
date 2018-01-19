@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Room";
 }
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
 <div class="gap"></div>
 <div class="grid-container">
 
@@ -10,14 +11,34 @@
     {
         @if (seat.Reserved)
         {
-            <div class="grid-reserved">@seat.ID</div>
+            <div id="@seat.ID" class="grid-reserved">@seat.ID</div>
 
         }
-        else{ 
+        else
+        {
 
-        <div class="grid-item">@seat.ID</div>
+            <div class="grid-item">@seat.ID</div>
         }
 
     }
 </div>
+<script>
+    $(document).ready(function () {
+        $(".grid-reserved").click(function () {
+            var obj = {}
+            var idContainer = {};
+            idContainer.ID = 19;
+            obj.idContainer = idContainer;
+
+
+
+
+            AjaxCall('/Projections/Reserve/', obj, function ajaxCallback(evt, success) {
+                alert("the method is working");
+            });
+        });
+
+    });
+</script>
+
 

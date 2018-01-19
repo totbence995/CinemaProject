@@ -189,13 +189,14 @@ namespace CinemaPink.Controllers
         {
             return _context.Projections.Any(e => e.ID == id);
         }
-        [HttpGet]
-        public async Task<IActionResult> Reserve(int id)
+        [HttpPost]
+        public async Task<IActionResult> Reserve(idContainer container)
         {
-            var projection = await _context.Projections.SingleOrDefaultAsync(p => p.ID == id);
+            container.ID = 19;
+            var projection = await _context.Projections.SingleOrDefaultAsync(p => p.ID == container.ID);
             await _context.Reservations.AddAsync(new Reservation()
             {
-                ProjectionID = id,
+                ProjectionID = container.ID,
 
                 SeatID = 2,
 
@@ -205,11 +206,16 @@ namespace CinemaPink.Controllers
 
             });
             await _context.SaveChangesAsync();
-            Notification notification = new Notification() { EmailAddress = "c@c.com", NumberOfSeats = 3, Title = "Star Wars VIII" };
-            //new Notification() obj;
-            return View(notification);
-        }
+            
 
+            return RedirectToAction(nameof(Notification));
+        }
+        public async Task<IActionResult> Notification()
+        {
+            
+            Notification notification = new Notification() { EmailAddress = "c@c.com", NumberOfSeats = 3, Title = "Star Wars VIII" };
+             return View(notification);
+        }
         public async Task<IActionResult> Room(int id)
         {
             var projection = await _context.Projections
