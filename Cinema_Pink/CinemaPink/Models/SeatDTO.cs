@@ -7,7 +7,7 @@ namespace CinemaPink.Models
 {
     public class SeatDTO
     {
-        public SeatDTO(int iD, bool reserved)
+        public SeatDTO(int iD, bool reserved=false)
         {
             ID = iD;
             Reserved = reserved;

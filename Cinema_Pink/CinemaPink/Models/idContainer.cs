@@ -8,7 +8,7 @@ namespace CinemaPink.Models
     public class idContainer
     {
         
-
+       
         public int ID { get; set; }
     }
 }

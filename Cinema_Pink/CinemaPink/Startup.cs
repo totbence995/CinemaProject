@@ -25,7 +25,7 @@ namespace CinemaPink
         {
             services.AddDbContext<Cinema_context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
             services.AddMvc();
         }
 

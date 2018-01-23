@@ -36,29 +36,50 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25% ;
-    
+    grid-template-columns: 25% 25% 25% 25%;
     background-color: #808080;
     padding: 10px;
+   
 }
 
 .grid-item {
-    background-color: #4cff00;
+    background-color: #00ff21;
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 10px;
     font-size: 10px;
     text-align: center;
     margin: 10px;
+    height:30px;
+    width:30px;
 }
+
 .grid-reserved {
-    background-color: #808080;
+    background-color: #ff0000;
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 10px;
     font-size: 10px;
     text-align: center;
     margin: 10px;
+    height: 30px;
+    width: 30px;
 }
-    .gap
+
+.gap {
+    margin: 20px;
+}
+
+.movieDiv {
+    height: 400px;
+    width: 300px;
+    background-color: white;
+    color: green;
+    border-color:deeppink;
+    position:absolute;
+    top:150px;
+    left:500px;
+    visibility:visible;
+}
+.invisible
 {
- margin:20px;
+ visibility:hidden;
 }

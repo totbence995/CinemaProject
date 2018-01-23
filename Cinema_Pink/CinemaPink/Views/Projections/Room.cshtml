@@ -6,37 +6,70 @@
 <div class="gap"></div>
 <div class="grid-container">
 
-
     @foreach (var seat in Model)
     {
         @if (seat.Reserved)
         {
-            <div id="@seat.ID" class="grid-reserved">@seat.ID</div>
+            <div class="grid-reserved" id="@seat.ID"> </div>
 
         }
         else
         {
-
-            <div class="grid-item">@seat.ID</div>
+            <div class="grid-item reserve" data-id=@seat.ID> </div>
         }
-
     }
+
 </div>
+<button id="Reservebtn">Reserve</button>
+<div id="divID" style="display:none;">
+    <label>Title</label>
+    <input type="text" id="titleID" />
+    <label>Email Address</label>
+    <input type="email" id="emailID" value="email@email.com" />
+    <label>Seats</label>
+    <input type="text" id="seatsID" />
+    <button>Ok</button>
+</div>
+
 <script>
     $(document).ready(function () {
-        $(".grid-reserved").click(function () {
-            var obj = {}
-            var idContainer = {};
-            idContainer.ID = 19;
-            obj.idContainer = idContainer;
+        
+        $("Reservebtn").click(function (evt) {
+
+            seatArray.push(evt.target.id);
+        });
+
+        $(".reserve").click(function (evt) {
+            
+
+            var obj = {};
+            obj.Id = 31;
+           
+
+            AjaxCall('/Projection/Reserve', obj, 'functionName', function ajaxCallback(evt, success) {
+                console.log(obj);
+            });
+            //obj.ID = $(this).data("id");
+            //console.log($(this).data("id"));
+
+            //var div = $("#divID");
+            //div.addClass("movieDiv");
+
 
 
 
 
             AjaxCall('/Projections/Reserve/', obj, function ajaxCallback(evt, success) {
-                alert("the method is working");
+                if (success) {
+                    //$("#divID").show();
+                    //$("#titleID").val(evt.title);
+                    //$("#emailID").val(evt.emailAddress);
+                    //$("#seatsID").val(evt.numberOfSeats);
+                    //console.log(evt.numberofseats);
+                }
             });
         });
+
 
     });
 </script>

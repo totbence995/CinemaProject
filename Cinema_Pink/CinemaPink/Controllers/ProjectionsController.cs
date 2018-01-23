@@ -27,9 +27,9 @@ namespace CinemaPink.Controllers
         //}
         public async Task<IActionResult> Index(
           string sortOrder,
-         string currentFilter,
-         string searchString,
-          int? page)
+        string currentFilter,
+        string searchString,
+        int? page = 1)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
@@ -190,32 +190,49 @@ namespace CinemaPink.Controllers
             return _context.Projections.Any(e => e.ID == id);
         }
         [HttpPost]
-        public async Task<IActionResult> Reserve(idContainer container)
+        public async Task<IActionResult> Reserve(int id)
         {
-            container.ID = 19;
-            var projection = await _context.Projections.SingleOrDefaultAsync(p => p.ID == container.ID);
-            await _context.Reservations.AddAsync(new Reservation()
+
+            List<int> SeatIdList = new List<int>() { 158, 159, 160 };
+
+            List<Seat> seats = null;
+                
+            foreach (var item in SeatIdList)
             {
-                ProjectionID = container.ID,
+                var seat = await _context.Seats.Where(s => s.ID == item).SingleOrDefaultAsync();
+                seats.Add(seat);
+            }
 
-                SeatID = 2,
+            var projection = await _context.Projections.Where(p => p.RoomID == seats[0].RoomID).SingleOrDefaultAsync();
 
-                Seat = _context.Seats.Where(s => s.ID == 3).FirstOrDefault()
+            foreach (var seat in seats)
+            {
+                await _context.Reservations.AddAsync(new Reservation()
+                {
+                    ProjectionID = projection.ID,
+
+                    SeatID = seat.ID,
+
+                    Seat = seat/* _context.Seats.Where(s => s.ID == 3).FirstOrDefault()*/
 
 
 
-            });
+                });
+            }
+            
             await _context.SaveChangesAsync();
-            
 
-            return RedirectToAction(nameof(Notification));
-        }
-        public async Task<IActionResult> Notification()
-        {
-            
+
             Notification notification = new Notification() { EmailAddress = "c@c.com", NumberOfSeats = 3, Title = "Star Wars VIII" };
-             return View(notification);
+            return Ok(notification);
         }
+
+        //public async Task<IActionResult> Notification()
+        //{
+        //    await _context.SaveChangesAsync();
+        //    Notification notification = new Notification() { EmailAddress = "c@c.com", NumberOfSeats = 3, Title = "Star Wars VIII" };
+        //     return View(notification);
+        //}
         public async Task<IActionResult> Room(int id)
         {
             var projection = await _context.Projections
@@ -224,8 +241,14 @@ namespace CinemaPink.Controllers
                 .Where(p => p.ID == id)
                             .FirstOrDefaultAsync();
 
-            var dTOList = projection.Room.Seats.Select(y => new SeatDTO(y.ID,true)).ToList();
-
+            var dTOList = projection.Room.Seats.Select(y => new SeatDTO(y.ID, false)).ToList();
+            foreach (var DTO in dTOList)
+            {
+                if (_context.Reservations.Any(x => x.SeatID == DTO.ID))
+                {
+                    DTO.Reserved = true;
+                }
+            }
 
             return View(dTOList);
         }
